@@ -4,22 +4,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean package' // No need to skip tests
+                bat 'mvn -DskipTests clean package'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
-            }            
-        }
-    }
-
-    post {
-        success {
-            echo "✅ Build & Test Successful!"
-        }
-        failure {
-            echo "❌ Build or Test Failed!"
+                bat 'mvn test'
+            }
         }
     }
 }
